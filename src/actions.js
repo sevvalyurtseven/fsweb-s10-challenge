@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const NOT_EKLE = "NOT_EKLE";
 export const NOT_SIL = "NOT_SIL";
@@ -6,18 +7,22 @@ export const FETCH_LOADING = "YUKLENIYOR";
 export const FETCH_ERROR = "HATA VAR";
 
 export function notEkle(not) {
+  toast.success("Not eklendi");
   return { type: NOT_EKLE, payload: not };
 }
 
 export function notSil(notId) {
+  toast.error("Not silindi", { autoClose: 2000 });
   return { type: NOT_SIL, payload: notId };
 }
 
 export function fetchLoading() {
+  toast.info("Yukleniyor...", { autoClose: 2000 });
   return { type: FETCH_LOADING };
 }
 
 export function fetchError(message) {
+  toast.error(message);
   return { type: FETCH_ERROR, payload: message };
 }
 
