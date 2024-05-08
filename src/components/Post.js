@@ -13,7 +13,7 @@ export default function Post({ item }) {
       title: "Bu notu silmek istediğinize emin misiniz?",
       icon: "warning",
       showDenyButton: true,
-      showCancelButton: true,
+      showCancelButton: false,
       confirmButtonColor: "#3085d6",
       denyButtonColor: "#d33",
       confirmButtonText: "Evet, Sil!",
