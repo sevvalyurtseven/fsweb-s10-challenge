@@ -3,8 +3,12 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
 import Img from "./assets/gratitude.jpg";
+import { useSelector } from "react-redux";
 
 export default function App() {
+  const loading = useSelector((store) => store.loading);
+  const error = useSelector((store) => store.error);
+
   return (
     <div>
       <div className="bg-white shadow mb-8">
@@ -55,15 +59,27 @@ export default function App() {
           </div>
         </Route>
         <Route path="/yeni-not">
-          <div className="max-w-md sm:max-w-4xl mx-auto px-4 pb-8">
-            <PostForm />
-          </div>
+          {loading ? (
+            <div className="beyazKutu text-center max-w-md mx-auto px-4 pb-8">
+              Kaydediliyor...
+            </div>
+          ) : (
+            <div className="max-w-md sm:max-w-4xl mx-auto px-4 pb-8">
+              <PostForm />
+            </div>
+          )}
         </Route>
 
         <Route path="/notlar">
-          <div className="max-w-md mx-auto px-4 pb-8">
-            <PostList />
-          </div>
+          {loading ? (
+            <div className="beyazKutu text-center max-w-md mx-auto px-4 pb-8">
+              Siliniyor...
+            </div>
+          ) : (
+            <div className="max-w-md mx-auto px-4 pb-8">
+              <PostList />
+            </div>
+          )}
         </Route>
       </Switch>
     </div>
