@@ -9,6 +9,14 @@ export default function App() {
   const loading = useSelector((store) => store.loading);
   const error = useSelector((store) => store.error);
 
+  if (error) {
+    return (
+      <div className="beyazKutu text-center max-w-md mx-auto px-4 pb-8">
+        Hata: {error}
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="bg-white shadow mb-8">
