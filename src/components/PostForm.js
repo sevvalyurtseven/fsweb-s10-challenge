@@ -5,7 +5,6 @@ import { useHistory } from "react-router";
 import Gratitude from "./../assets/grForm.png";
 import { useDispatch } from "react-redux";
 import { notEkleAPI } from "../actions";
-import { toast } from "react-toastify";
 
 export default function PostForm() {
   const dispatch = useDispatch();

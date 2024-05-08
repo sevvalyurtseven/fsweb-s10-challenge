@@ -3,12 +3,30 @@ import { formatDistanceToNow } from "date-fns";
 import { tr } from "date-fns/locale";
 import { useDispatch } from "react-redux";
 import { notSilAPI } from "../actions";
+import Swal from "sweetalert2";
 
 export default function Post({ item }) {
   const dispatch = useDispatch();
 
   function handleSil() {
-    dispatch(notSilAPI(item.id));
+    Swal.fire({
+      title: "Bu notu silmek istediğinize emin misiniz?",
+      icon: "warning",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      denyButtonColor: "#d33",
+      confirmButtonText: "Evet, Sil!",
+      denyButtonText: `Hayır, Silme`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Notunuz silindi.", "", "success");
+        dispatch(notSilAPI(item.id));
+      } else if (result.isDenied) {
+        Swal.fire("Notunuz silinmedi.", "", "info");
+      }
+    });
+
     // burada ilgili eylemi dispatch edin
     // sonra toast mesajı gösterin
   }
@@ -28,7 +46,10 @@ export default function Post({ item }) {
         </p>
       ))}
 
-      <button className="text-xs text-amber-600 mt-4 underline" onClick={handleSil}>
+      <button
+        className="text-xs text-amber-600 mt-4 underline"
+        onClick={handleSil}
+      >
         Bu notu sil
       </button>
     </div>
